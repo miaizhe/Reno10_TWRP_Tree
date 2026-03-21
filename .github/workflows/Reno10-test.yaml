@@ -43,10 +43,18 @@ jobs:
 
     - name: 载入设备树
       run: |
-        # 将当前的设备树放入源码对应目录
-        # 注意：这里假设你的设备树路径应为 device/oppo/PHW110
-        mkdir -p work/device/oppo/PHW110
-        cp -r * work/device/oppo/PHW110/
+        # 1. 先把当前仓库的文件（设备树）移动到一个临时目录，避免 cp 时的递归冲突
+        mkdir -p temp_device_tree
+        # 排除 .git 和 work 目录，拷贝其余所有文件
+        rsync -av --exclude='.git' --exclude='work' ./ temp_device_tree/
+        
+        # 2. 创建目标路径并移动过去
+        cd work
+        mkdir -p device/oppo/PHW110
+        cp -r ../temp_device_tree/* device/oppo/PHW110/
+        
+        # 3. 验证一下文件是否放对了（可选，方便看日志排错）
+        ls -R device/oppo/PHW110
 
     - name: 开始编译
       run: |
