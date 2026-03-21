@@ -38,7 +38,7 @@ jobs:
     - name: 5. 克隆设备树
       run: |
         cd twrp
-        git clone https://github.com/WenHao-Dev/twrp_device_oppo_taylor.git device/oppo/taylor
+        git clone https://github.com/miaizhe/twrp_device_oppo_taylor.git device/oppo/taylor
 
     - name: 6. 开始全量镜像编译
       run: |
