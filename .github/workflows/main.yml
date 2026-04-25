@@ -2,6 +2,7 @@ name: Build TWRP - OPPO K11 (Taylor)
 
 on:
   workflow_dispatch:
+  push: 
 
 jobs:
   build:
@@ -40,7 +41,7 @@ jobs:
         cd twrp
         git clone https://github.com/WenHao-Dev/twrp_device_oppo_taylor.git device/oppo/taylor
         rm -r device/oppo/taylor/prebuilts/Image
-        wget https://github.com/miaizhe/twrp_device_oppo_taylor/releases/download/boot/Image device/oppo/taylor/prebuilts/
+        wget https://github.com/miaizhe/twrp_device_oppo_taylor/releases/download/boot/Image -o device/oppo/taylor/prebuilts/
 
     - name: 6. 开始全量镜像编译
       run: |
